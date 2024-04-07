@@ -1,27 +1,25 @@
 package igu;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Toolkit;
 import java.awt.Color;
-import javax.swing.JTextArea;
-import javax.swing.JEditorPane;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 /**
  * 
  * Clase Ventana.java
@@ -41,7 +39,7 @@ public class Ventana extends JFrame {
 	private JLabel lblRepiteElPassword;
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellidos;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JPanel panelCheck;
 	private JRadioButton rdbtnHombre;
 	private JRadioButton rdbtnMujer;
@@ -49,6 +47,7 @@ public class Ventana extends JFrame {
 	private JButton btnCancelar;
 	private JPasswordField passwordField1;
 	private JPasswordField passwordField2;
+	private ButtonGroup grupo = new ButtonGroup();
 
 	/**
 	 * Create the frame.
@@ -146,9 +145,14 @@ public class Ventana extends JFrame {
 		}
 		return textFieldApellidos;
 	}
-	private JComboBox getComboBox() {
+	private JComboBox<String> getComboBox() {
 		if (comboBox == null) {
-			comboBox = new JComboBox();
+			String[] años = new String[90];
+			for (int i = 0; i < 90; i++) {
+				años[i] = "" + ((90-i)+1920);
+			}
+			comboBox = new JComboBox<String>();
+			comboBox.setModel(new DefaultComboBoxModel<String>(años));
 			comboBox.setBounds(130, 73, 159, 20);
 		}
 		return comboBox;
@@ -168,6 +172,7 @@ public class Ventana extends JFrame {
 	private JRadioButton getRdbtnHombre() {
 		if (rdbtnHombre == null) {
 			rdbtnHombre = new JRadioButton("Varón");
+			grupo.add(rdbtnHombre);
 			rdbtnHombre.setSelected(true);
 			rdbtnHombre.setBounds(40, 17, 59, 23);
 		}
@@ -176,6 +181,7 @@ public class Ventana extends JFrame {
 	private JRadioButton getRdbtnMujer() {
 		if (rdbtnMujer == null) {
 			rdbtnMujer = new JRadioButton("Hembra");
+			grupo.add(rdbtnMujer);
 			rdbtnMujer.setBounds(139, 17, 71, 23);
 		}
 		return rdbtnMujer;
