@@ -12,6 +12,8 @@ import javax.swing.JEditorPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -183,17 +185,33 @@ public class Ventana extends JFrame {
 			btnSiguiente = new JButton("Siguiente");
 			btnSiguiente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ComprobarNombre();
+					Comprobar();
 				}
 			});
-			btnSiguiente.setEnabled(false);
 			btnSiguiente.setBackground(new Color(34, 139, 34));
 			btnSiguiente.setForeground(Color.WHITE);
 			btnSiguiente.setBounds(352, 214, 107, 36);
 		}
 		return btnSiguiente;
 	}
-	protected void ComprobarNombre() {
+	protected void Comprobar() {
+		var contraseña = String.valueOf(getPasswordField1().getPassword());
+		var contraseñaRepetida = String.valueOf(getPasswordField2().getPassword());
+		var nombre = getTextFieldNombre();
+		var apellidos = getTextFieldApellidos();
+		if(nombre.getText().isBlank()||nombre.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "El campo [nombre] debe rellenarse");
+		}
+		else if(apellidos.getText().isBlank()||apellidos.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "El campo [apellidos] debe rellenarse");
+		}
+		else if(!contraseña.equals(contraseñaRepetida)) {
+			JOptionPane.showMessageDialog(this, "La contraseña no corresponde con la contraseña repetida");
+		}
+		else {
+			JOptionPane.showMessageDialog(this, "¡Formulario Completado!");
+			System.exit(0);
+		}
 		
 		
 	}
