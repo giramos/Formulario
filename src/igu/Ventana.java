@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 /**
  * 
  * Clase Ventana.java
@@ -36,14 +39,14 @@ public class Ventana extends JFrame {
 	private JLabel lblRepiteElPassword;
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellidos;
-	private JTextField textFieldPassword;
-	private JTextField textFieldPasswordRepetido;
 	private JComboBox comboBox;
 	private JPanel panelCheck;
 	private JRadioButton rdbtnHombre;
 	private JRadioButton rdbtnMujer;
 	private JButton btnSiguiente;
 	private JButton btnCancelar;
+	private JPasswordField passwordField1;
+	private JPasswordField passwordField2;
 
 	/**
 	 * Create the frame.
@@ -56,7 +59,7 @@ public class Ventana extends JFrame {
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBackground(Color.GRAY);
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setLocationRelativeTo(null);
 		setContentPane(panelPrincipal);
 		panelPrincipal.setLayout(null);
 		panelPrincipal.add(getPanelDatos());
@@ -79,9 +82,9 @@ public class Ventana extends JFrame {
 			panelDatos.add(getLblRepiteElPassword());
 			panelDatos.add(getTextFieldNombre());
 			panelDatos.add(getTextFieldApellidos());
-			panelDatos.add(getTextFieldPassword());
-			panelDatos.add(getTextFieldPasswordRepetido());
 			panelDatos.add(getComboBox());
+			panelDatos.add(getPasswordField1());
+			panelDatos.add(getPasswordField2());
 		}
 		return panelDatos;
 	}
@@ -141,22 +144,6 @@ public class Ventana extends JFrame {
 		}
 		return textFieldApellidos;
 	}
-	private JTextField getTextFieldPassword() {
-		if (textFieldPassword == null) {
-			textFieldPassword = new JTextField();
-			textFieldPassword.setColumns(10);
-			textFieldPassword.setBounds(76, 104, 478, 20);
-		}
-		return textFieldPassword;
-	}
-	private JTextField getTextFieldPasswordRepetido() {
-		if (textFieldPasswordRepetido == null) {
-			textFieldPasswordRepetido = new JTextField();
-			textFieldPasswordRepetido.setColumns(10);
-			textFieldPasswordRepetido.setBounds(130, 135, 424, 20);
-		}
-		return textFieldPasswordRepetido;
-	}
 	private JComboBox getComboBox() {
 		if (comboBox == null) {
 			comboBox = new JComboBox();
@@ -194,6 +181,11 @@ public class Ventana extends JFrame {
 	private JButton getBtnSiguiente() {
 		if (btnSiguiente == null) {
 			btnSiguiente = new JButton("Siguiente");
+			btnSiguiente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ComprobarNombre();
+				}
+			});
 			btnSiguiente.setEnabled(false);
 			btnSiguiente.setBackground(new Color(34, 139, 34));
 			btnSiguiente.setForeground(Color.WHITE);
@@ -201,13 +193,36 @@ public class Ventana extends JFrame {
 		}
 		return btnSiguiente;
 	}
+	protected void ComprobarNombre() {
+		
+		
+	}
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
+			btnCancelar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0); // si pulsamos el siguiente boton "Cancelar", la ventana se cierra
+				}
+			});
 			btnCancelar.setForeground(Color.WHITE);
 			btnCancelar.setBackground(Color.RED);
 			btnCancelar.setBounds(469, 214, 107, 36);
 		}
 		return btnCancelar;
+	}
+	private JPasswordField getPasswordField1() {
+		if (passwordField1 == null) {
+			passwordField1 = new JPasswordField();
+			passwordField1.setBounds(67, 104, 487, 20);
+		}
+		return passwordField1;
+	}
+	private JPasswordField getPasswordField2() {
+		if (passwordField2 == null) {
+			passwordField2 = new JPasswordField();
+			passwordField2.setBounds(152, 136, 402, 23);
+		}
+		return passwordField2;
 	}
 }
